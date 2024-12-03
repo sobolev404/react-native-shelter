@@ -1,5 +1,11 @@
 import React, { useState, useContext } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "expo-router";
 
@@ -10,7 +16,7 @@ const RegisterPage = () => {
   const [avatarUrl, setAvatarUrl] = useState("");
 
   const { register } = useContext(AuthContext);
-  const router = useRouter(); // Используем useRouter для маршрутизации
+  const router = useRouter();
 
   const handleSubmit = async () => {
     try {
@@ -57,7 +63,7 @@ const RegisterPage = () => {
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
-        <TouchableOpacity  onPress={() => router.push("login")} >
+        <TouchableOpacity onPress={() => router.push("login")}>
           <Text style={styles.link}>Already have an account? Login!</Text>
         </TouchableOpacity>
       </View>
@@ -70,10 +76,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f1cdb3", // Бежевый цвет
+    backgroundColor: "#f1cdb3",
   },
   authCard: {
-    backgroundColor: "#5a3c2a", // Коричневый цвет
+    backgroundColor: "#5a3c2a",
     padding: 30,
     borderRadius: 12,
     shadowColor: "#000",

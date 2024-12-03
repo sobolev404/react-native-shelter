@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-} from "react-native";
+import { View, StyleSheet, SafeAreaView, FlatList } from "react-native";
 import Header from "@/components/Header";
 import PetsCardsSection from "@/components/PetsCardsSection";
 import Footer from "@/components/Footer";
 
 export default function HomeScreen() {
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // Состояние для открытия попапа
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const renderContent = () => {
     return (
@@ -25,10 +20,10 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={[1]} // Пустой массив данных для FlatList
-        renderItem={() => renderContent()} // Отображение контента в FlatList
+        data={[1]}
+        renderItem={() => renderContent()}
         keyExtractor={(item, index) => index.toString()}
-        scrollEnabled={!isPopupOpen} // Отключаем прокрутку при открытом попапе
+        scrollEnabled={!isPopupOpen}
       />
     </SafeAreaView>
   );

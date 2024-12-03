@@ -1,7 +1,12 @@
 import React, { useContext, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-import { AuthContext } from "@/context/AuthContext"; // Импортируем контекст
-
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function AddNewPet() {
   const [isEditing, setIsEditing] = useState(false);
@@ -16,9 +21,7 @@ export default function AddNewPet() {
     petDiseases: "",
     petParasites: "",
   });
-  const { fetchPets } = useContext(AuthContext); // Получаем функцию fetchPets из контекста
-
-
+  const { fetchPets } = useContext(AuthContext);
   const handleChange = (name, value) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -46,13 +49,16 @@ export default function AddNewPet() {
     };
 
     try {
-      const response = await fetch("https://69f8-46-56-251-2.ngrok-free.app/pets", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://d8f8-151-249-187-243.ngrok-free.app/pets",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -70,7 +76,7 @@ export default function AddNewPet() {
           petParasites: "",
         });
 
-        fetchPets()
+        fetchPets();
       } else {
         console.error("Ошибка при добавлении питомца");
       }
@@ -96,42 +102,42 @@ export default function AddNewPet() {
           <TextInput
             style={styles.input}
             placeholder="Name"
-            placeholderTextColor="#888" // Задайте цвет для placeholder
+            placeholderTextColor="#888"
             value={formData.name}
             onChangeText={(text) => handleChange("name", text)}
           />
           <TextInput
             style={styles.input}
             placeholder="Pet image(url)"
-            placeholderTextColor="#888" // Задайте цвет для placeholder
+            placeholderTextColor="#888"
             value={formData.petImg}
             onChangeText={(text) => handleChange("petImg", text)}
           />
           <TextInput
             style={styles.input}
             placeholder="Type (dog/cat/etc)"
-            placeholderTextColor="#888" // Задайте цвет для placeholder
+            placeholderTextColor="#888"
             value={formData.petType}
             onChangeText={(text) => handleChange("petType", text)}
           />
           <TextInput
             style={styles.input}
             placeholder="Breed"
-            placeholderTextColor="#888" // Задайте цвет для placeholder
+            placeholderTextColor="#888"
             value={formData.petBreed}
             onChangeText={(text) => handleChange("petBreed", text)}
           />
           <TextInput
             style={styles.input}
             placeholder="Description"
-            placeholderTextColor="#888" // Задайте цвет для placeholder
+            placeholderTextColor="#888"
             value={formData.petDesc}
             onChangeText={(text) => handleChange("petDesc", text)}
           />
           <TextInput
             style={styles.input}
             placeholder="Age (months)"
-            placeholderTextColor="#888" // Задайте цвет для placeholder
+            placeholderTextColor="#888"
             value={formData.petAge}
             onChangeText={(text) => handleChange("petAge", text)}
             keyboardType="numeric"
@@ -139,21 +145,21 @@ export default function AddNewPet() {
           <TextInput
             style={styles.input}
             placeholder="Inoculations (not required)"
-            placeholderTextColor="#888" // Задайте цвет для placeholder
+            placeholderTextColor="#888"
             value={formData.petInoculations}
             onChangeText={(text) => handleChange("petInoculations", text)}
           />
           <TextInput
             style={styles.input}
             placeholder="Diseases (not required)"
-            placeholderTextColor="#888" // Задайте цвет для placeholder
+            placeholderTextColor="#888"
             value={formData.petDiseases}
             onChangeText={(text) => handleChange("petDiseases", text)}
           />
           <TextInput
             style={styles.input}
             placeholder="Parasites (not required)"
-            placeholderTextColor="#888" // Задайте цвет для placeholder
+            placeholderTextColor="#888"
             value={formData.petParasites}
             onChangeText={(text) => handleChange("petParasites", text)}
           />
@@ -199,7 +205,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     fontSize: 14,
     marginBottom: 15,
-    color:'black',
+    color: "black",
   },
   btns: {
     flexDirection: "row",
@@ -224,4 +230,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc",
   },
 });
-

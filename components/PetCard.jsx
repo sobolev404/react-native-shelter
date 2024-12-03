@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 export default function PetCard({ pet, onClick }) {
   return (
@@ -16,10 +16,10 @@ export default function PetCard({ pet, onClick }) {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#fafafa',
+    alignItems: "center",
+    backgroundColor: "#fafafa",
     borderRadius: 8,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 8,
@@ -32,19 +32,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   name: {
-    color: 'black',
+    color: "black",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginVertical: 8,
   },
   button: {
-    backgroundColor: '#f1cdb3', // '#f1cdb3'
+    backgroundColor: "#f1cdb3",
     borderRadius: 16,
     padding: 8,
     marginTop: 8,
   },
   buttonText: {
-    color: 'black',
-    fontWeight: 'bold',
+    color: "black",
+    fontWeight: "bold",
   },
 });

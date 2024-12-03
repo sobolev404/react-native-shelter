@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  FlatList,
+} from "react-native";
 import PetCard from "./PetCard";
 import PetPopup from "./PetPopup";
 import { AuthContext } from "@/context/AuthContext";
 export default function PetsCardSection() {
-  const { fetchPets, petsApi, loading } = useContext(AuthContext); // Получаем данные и функцию из контекста
+  const { fetchPets, petsApi, loading } = useContext(AuthContext);
   const [selectedPet, setSelectedPet] = useState(null);
-
-
 
   useEffect(() => {
     fetchPets();
@@ -40,9 +44,7 @@ export default function PetsCardSection() {
           contentContainerStyle={styles.list}
         />
       )}
-      {selectedPet && (
-        <PetPopup pet={selectedPet} closePopup={closePopup} />
-      )}
+      {selectedPet && <PetPopup pet={selectedPet} closePopup={closePopup} />}
     </View>
   );
 }

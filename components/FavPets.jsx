@@ -9,29 +9,25 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigation } from "@react-navigation/native"; // Навигация
+import { useNavigation } from "@react-navigation/native";
 import PetCard from "./PetCard";
-import PetPopup from './PetPopup'
+import PetPopup from "./PetPopup";
 
 export default function FavPets() {
   const [selectedPet, setSelectedPet] = useState(null);
-  const { user, userPets, fetchUserPets } = useContext(AuthContext); // Используем контекст
+  const { user, userPets, fetchUserPets } = useContext(AuthContext);
   const navigation = useNavigation();
-
-  
 
   useEffect(() => {
     if (!user) {
-      navigation.navigate("Home"); // Перенаправляем на главную страницу, если пользователь не авторизован
+      navigation.navigate("Home");
     }
   }, [user, navigation]);
 
-  // Открытие модального окна
   function openPopup(pet) {
     setSelectedPet(pet);
   }
 
-  // Закрытие модального окна
   function closePopup() {
     setSelectedPet(null);
   }
@@ -53,10 +49,7 @@ export default function FavPets() {
           data={userPets}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <PetCard
-              pet={item}
-              onClick={() => openPopup(item)} // Открываем модальное окно
-            />
+            <PetCard pet={item} onClick={() => openPopup(item)} />
           )}
           contentContainerStyle={styles.list}
         />

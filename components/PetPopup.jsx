@@ -14,7 +14,8 @@ import { AuthContext } from "../context/AuthContext";
 import { usePathname } from "expo-router";
 
 export default function PetPopup({ pet, closePopup }) {
-  const { user, addPetToUser, removePetFromUser,addAdoptedPet } = useContext(AuthContext);
+  const { user, addPetToUser, removePetFromUser, addAdoptedPet } =
+    useContext(AuthContext);
 
   const pathname = usePathname();
 
@@ -54,10 +55,10 @@ export default function PetPopup({ pet, closePopup }) {
 
   return (
     <Modal
-      animationType="slide" // Анимация сдвига
-      transparent={true} // Прозрачный фон
-      visible={true} // Модальное окно будет видимо
-      onRequestClose={closePopup} // Закрытие при нажатии кнопки "Назад" на Android
+      animationType="slide"
+      transparent={true}
+      visible={true}
+      onRequestClose={closePopup}
     >
       <TouchableWithoutFeedback onPress={closePopup}>
         <View style={styles.popupContainer}>
@@ -97,7 +98,10 @@ export default function PetPopup({ pet, closePopup }) {
                 </TouchableOpacity>
               )}
               {user && pathname === "/profile" && (
-                <TouchableOpacity style={[styles.actionButton,styles.addButton]} onPress={handleAddAdoptedPet}>
+                <TouchableOpacity
+                  style={[styles.actionButton, styles.addButton]}
+                  onPress={handleAddAdoptedPet}
+                >
                   <Text style={styles.actionButtonText}>Take to home</Text>
                 </TouchableOpacity>
               )}
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Полупрозрачный фон
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   popupContent: {
     backgroundColor: "#fafafa",

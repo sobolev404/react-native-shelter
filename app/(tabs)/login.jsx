@@ -12,7 +12,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useRouter } from "expo-router";
 
 const LoginPage = () => {
-  const { user, login, logout } = useContext(AuthContext); // Получаем данные из контекста
+  const { user, login, logout } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -26,7 +26,6 @@ const LoginPage = () => {
   };
 
   if (user) {
-    // Если пользователь авторизован
     return (
       <View style={styles.authContainer}>
         <View style={styles.authCard}>
@@ -39,7 +38,6 @@ const LoginPage = () => {
     );
   }
 
-  // Если пользователь не авторизован
   return (
     <KeyboardAvoidingView
       style={styles.authContainer}
@@ -50,7 +48,7 @@ const LoginPage = () => {
         <TextInput
           style={styles.input}
           placeholder="Email"
-          placeholderTextColor="#888" // Задайте цвет для placeholder
+          placeholderTextColor="#888"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
@@ -67,9 +65,7 @@ const LoginPage = () => {
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => router.push("register")}
-        >
+        <TouchableOpacity onPress={() => router.push("register")}>
           <Text style={styles.link}>Don't have an account? Register!</Text>
         </TouchableOpacity>
       </View>

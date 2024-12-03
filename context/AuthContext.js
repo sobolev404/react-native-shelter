@@ -9,12 +9,12 @@ export const AuthProvider = ({ children }) => {
   const [userPets, setUserPets] = useState([]);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [adoptedPets,setAdoptedPets] = useState([])
+  const [adoptedPets, setAdoptedPets] = useState([]);
 
   const [petsApi, setPetsApi] = useState([]);
 
-  const router = useRouter(); // Используем useRouter для маршрутизации
-  const URL = "https://d3ab-146-120-15-51.ngrok-free.app";
+  const router = useRouter();
+  const URL = "https://d8f8-151-249-187-243.ngrok-free.app";
   // const URL = 'http://localhost:4444'
   useEffect(() => {
     const initializeAuth = async () => {
@@ -45,9 +45,8 @@ export const AuthProvider = ({ children }) => {
       const userData = await response.json();
       setUser(userData);
 
-      // Fetch user's favorite pets
       setUserPets(userData.favoritePets);
-      setAdoptedPets(userData.adoptedPets)
+      setAdoptedPets(userData.adoptedPets);
     } catch (error) {
       console.error("Error fetching user data:", error);
     } finally {
@@ -73,9 +72,9 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ userId: user._id }), // Передаем userId в body
+        body: JSON.stringify({ userId: user._id }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         setUserPets((prev) => ({ ...prev, favoritePets: data.favoritePets }));
@@ -95,9 +94,9 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ userId: user._id }), // Передаем userId в body
+        body: JSON.stringify({ userId: user._id }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         setAdoptedPets((prev) => ({ ...prev, adoptedPets: data.adoptedPets }));
@@ -108,7 +107,6 @@ export const AuthProvider = ({ children }) => {
       console.error("Error fetching adopted pets:", error);
     }
   };
-  
 
   const login = async (email, password) => {
     try {
@@ -144,29 +142,27 @@ export const AuthProvider = ({ children }) => {
         },
         body: JSON.stringify({ email, password, fullName, avatarUrl }),
       });
-  
+
       const data = await response.json();
-  
+
       if (!response.ok) {
         if (data.errors) {
-          // Если есть ошибки валидации, выводим их
-          alert(data.errors.join("\n")); // Выводим все ошибки в одном сообщении
+          alert(data.errors.join("\n"));
         } else {
           throw new Error(data.message || "Registration failed");
         }
         return;
       }
-  
+
       setUser(data);
       setToken(data.token);
       await AsyncStorage.setItem("token", data.token);
       router.push("/");
     } catch (error) {
       console.error("Registration error:", error);
-      alert("Произошла ошибка при регистрации: " + error.message); // Показываем сообщение об ошибке
+      alert("Произошла ошибка при регистрации: " + error.message);
     }
   };
-  
 
   const addPetToUser = async (pet) => {
     try {
@@ -176,13 +172,13 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ userId: user._id, petId: pet._id }), // Отправляем только petId
+        body: JSON.stringify({ userId: user._id, petId: pet._id }),
       });
 
       if (response.ok) {
         const data = await response.json();
         alert(`${pet.name} was added to your wishlist`);
-        setUserPets(data.user.favoritePets); // Обновляем состояние избранного
+        setUserPets(data.user.favoritePets);
         fetchPets();
       } else {
         const error = await response.json();
@@ -211,7 +207,7 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         alert(`${pet.name} was removed from your wishlist`);
-        setUserPets(data.user.favoritePets); // Обновляем состояние избранных
+        setUserPets(data.user.favoritePets);
         fetchPets();
       } else {
         alert("Failed to remove pet from wishlist.");
@@ -231,8 +227,8 @@ export const AuthProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          userId: user._id, // ID пользователя
-          petId: pet._id, // ID питомца
+          userId: user._id,
+          petId: pet._id,
         }),
       });
 
@@ -240,8 +236,8 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         alert(`${pet.name} has been successfully adopted`);
         setAdoptedPets(data.user.adoptedPets);
-        fetchPets(); // Опционально обновляем список всех питомцев
-        setUserPets(data.user.favoritePets)
+        fetchPets();
+        setUserPets(data.user.favoritePets);
       } else {
         const error = await response.json();
         alert(`Failed to adopt pet: ${error.message}`);
@@ -264,13 +260,13 @@ export const AuthProvider = ({ children }) => {
       const response = await fetch(`${URL}/pets/${petId}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`, // Добавьте токен, если API требует авторизации
+          Authorization: `Bearer ${token}`,
         },
       });
-  
+
       if (response.ok) {
         alert("Pet deleted successfully!");
-        fetchPets(); // Обновите список питомцев после удаления
+        fetchPets();
       } else {
         const error = await response.json();
         alert(`Failed to delete pet: ${error.message}`);
@@ -280,7 +276,6 @@ export const AuthProvider = ({ children }) => {
       alert("An error occurred while deleting the pet.");
     }
   };
-  
 
   return (
     <AuthContext.Provider
@@ -296,13 +291,13 @@ export const AuthProvider = ({ children }) => {
         removePetFromUser,
         userPets,
         setUserPets,
-        fetchPets, // добавили fetchPets
-        petsApi, // доступ к данным питомцев
+        fetchPets,
+        petsApi,
         addAdoptedPet,
         adoptedPets,
         fetchAdoptedPets,
         fetchUserPets,
-        deletePet
+        deletePet,
       }}
     >
       {children}

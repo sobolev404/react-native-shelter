@@ -31,7 +31,7 @@ export default function AdminPets() {
   const handleUpdate = async () => {
     try {
       const response = await fetch(
-        `https://d3ab-146-120-15-51.ngrok-free.app/pets/${editingPet._id}`,
+        `https://d8f8-151-249-187-243.ngrok-free.app/pets/${editingPet._id}`,
         {
           method: "PATCH",
           headers: {
@@ -88,7 +88,7 @@ export default function AdminPets() {
   const handleDelete = async (petId) => {
     try {
       const response = await fetch(
-        `https://d3ab-146-120-15-51.ngrok-free.app/pets/${petId}`,
+        `https://d8f8-151-249-187-243.ngrok-free.app/pets/${petId}`,
         {
           method: "DELETE",
         }
@@ -116,7 +116,6 @@ export default function AdminPets() {
         contentContainerStyle={styles.cardList}
       />
 
-      {/* Модальное окно для редактирования */}
       {isModalVisible && editingPet && (
         <Modal
           visible={isModalVisible}

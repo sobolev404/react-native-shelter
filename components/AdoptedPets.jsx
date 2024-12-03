@@ -10,27 +10,25 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigation } from "@react-navigation/native"; // Навигация
+import { useNavigation } from "@react-navigation/native";
 import PetCard from "./PetCard";
 import PetPopup from "./PetPopup";
 
 export default function AdoptedPets() {
   const [selectedPet, setSelectedPet] = useState(null);
-  const { user, adoptedPets, fetchAdoptedPets } = useContext(AuthContext); // Используем контекст
+  const { user, adoptedPets, fetchAdoptedPets } = useContext(AuthContext);
   const navigation = useNavigation();
 
   useEffect(() => {
     if (!user) {
-      navigation.navigate("Home"); // Перенаправляем на главную страницу, если пользователь не авторизован
+      navigation.navigate("Home");
     }
   }, [user, navigation]);
 
-  // Открытие модального окна
   function openPopup(pet) {
     setSelectedPet(pet);
   }
 
-  // Закрытие модального окна
   function closePopup() {
     setSelectedPet(null);
   }
@@ -140,10 +138,10 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#fafafa',
+    alignItems: "center",
+    backgroundColor: "#fafafa",
     borderRadius: 8,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 8,
@@ -156,9 +154,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   name: {
-    color: 'black',
+    color: "black",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginVertical: 8,
   },
 });

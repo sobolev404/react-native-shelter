@@ -14,30 +14,27 @@ export default function Header() {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const menuPosition = useRef(
     new Animated.Value(Dimensions.get("window").width)
-  ).current; // Начальная позиция меню за пределами экрана справа
-  const overlayOpacity = useRef(new Animated.Value(0)).current; // Начальная прозрачность overlay
+  ).current;
+  const overlayOpacity = useRef(new Animated.Value(0)).current;
 
   const { user } = useContext(AuthContext);
 
-  // Функция для переключения состояния меню
   const toggleMenu = () => {
     setIsMenuActive((prev) => !prev);
   };
 
   useEffect(() => {
     Animated.timing(menuPosition, {
-      toValue: isMenuActive ? 0 : Dimensions.get("window").width, // Если меню активно, перемещаем в 0 (на экран), иначе за пределы экрана
+      toValue: isMenuActive ? 0 : Dimensions.get("window").width,
       duration: 300,
       useNativeDriver: true,
     }).start();
 
     Animated.timing(overlayOpacity, {
-      toValue: isMenuActive ? 1 : 0, // Плавное изменение прозрачности overlay
+      toValue: isMenuActive ? 1 : 0,
       duration: 300,
       useNativeDriver: true,
     }).start();
-
-    
   }, [isMenuActive]);
 
   return (
@@ -54,10 +51,7 @@ export default function Header() {
         {isMenuActive && (
           <TouchableWithoutFeedback onPress={toggleMenu}>
             <Animated.View
-              style={[
-                styles.overlay,
-                { opacity: overlayOpacity }, // Прозрачность затемнения
-              ]}
+              style={[styles.overlay, { opacity: overlayOpacity }]}
             />
           </TouchableWithoutFeedback>
         )}
@@ -65,7 +59,7 @@ export default function Header() {
           style={[
             styles.nav,
             {
-              transform: [{ translateX: menuPosition }], // Анимация выезда
+              transform: [{ translateX: menuPosition }],
             },
           ]}
         >
@@ -102,20 +96,20 @@ const styles = StyleSheet.create({
   nav: {
     position: "absolute",
     top: -20,
-    right: -10, // Начальная позиция меню за экраном справа
+    right: -10,
     width: Dimensions.get("window").width * 0.8,
     height: Dimensions.get("window").height,
     backgroundColor: "#292929",
-    justifyContent: "center", // Центрирование по вертикали
-    alignItems: "center", // Центрирование по горизонтали
+    justifyContent: "center",
+    alignItems: "center",
     zIndex: 2,
     rowGap: 30,
   },
   navItem: {
     color: "#f1cdb3",
-    fontSize: 30, // Размер шрифта для лучшей читаемости
-    marginVertical: 30, // Расстояние между ссылками
-    textAlign: "center", // Центрируем текст
+    fontSize: 30,
+    marginVertical: 30,
+    textAlign: "center",
   },
   overlay: {
     position: "absolute",
@@ -123,7 +117,7 @@ const styles = StyleSheet.create({
     left: -350,
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Полупрозрачный черный фон
-    zIndex: 1, // На заднем плане меню
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 1,
   },
 });

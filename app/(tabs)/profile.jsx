@@ -17,12 +17,11 @@ import { AuthContext } from "../../context/AuthContext";
 import { useRouter } from "expo-router";
 import AdminPets from "../../components/AdminPets";
 
-
 export default function HomeScreen() {
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // Состояние для открытия попапа
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const { user } = useContext(AuthContext); // Получаем данные из контекста
-  const router = useRouter()
+  const { user } = useContext(AuthContext);
+  const router = useRouter();
   const renderContent = () => {
     return (
       <>
@@ -38,14 +37,16 @@ export default function HomeScreen() {
   };
 
   if (!user) {
-    // Если пользователь авторизован
     return (
       <View style={styles.authContainer}>
         <View style={styles.authCard}>
           <Text style={styles.title}>You haven't been already log in!</Text>
-            <TouchableOpacity style={styles.button} onPress={()=>router.push('/login')}>
-              <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => router.push("/login")}
+          >
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -54,10 +55,10 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={[1]} // Пустой массив данных для FlatList
-        renderItem={() => renderContent()} // Отображение контента в FlatList
+        data={[1]}
+        renderItem={() => renderContent()}
         keyExtractor={(item, index) => index.toString()}
-        scrollEnabled={!isPopupOpen} // Отключаем прокрутку при открытом попапе
+        scrollEnabled={!isPopupOpen}
       />
     </SafeAreaView>
   );

@@ -41,18 +41,21 @@ export default function EditUser() {
 
   async function handleSubmit() {
     try {
-      const response = await fetch(`https://d3ab-146-120-15-51.ngrok-free.app/auth/update`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          avatarUrl: formData.avatarUrl,
-          password: formData.password || undefined,
-        }),
-      });
+      const response = await fetch(
+        `https://d8f8-151-249-187-243.ngrok-free.app/auth/update`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            fullName: formData.fullName,
+            avatarUrl: formData.avatarUrl,
+            password: formData.password || undefined,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update profile");
@@ -82,7 +85,9 @@ export default function EditUser() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{user.isAdmin ? "Admin Panel" :'User Profile'}</Text>
+      <Text style={styles.title}>
+        {user.isAdmin ? "Admin Panel" : "User Profile"}
+      </Text>
       {user ? (
         <>
           {!isEditing ? (
@@ -154,7 +159,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     borderRadius: 8,
-    borderWidth:1,
+    borderWidth: 1,
     borderColor: "#ccc",
     padding: 20,
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
